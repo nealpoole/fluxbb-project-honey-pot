@@ -2,8 +2,8 @@
 ##
 ##        Mod title:  Project Honey Pot http:BL Integration
 ##
-##      Mod version:  1.0
-##  Works on FluxBB:  1.2.*
+##      Mod version:  1.1
+##  Works on FluxBB:  1.4.*
 ##     Release date:  2007-05-19
 ##           Author:  Smartys (smartys@punbb-hosting.com)
 ##
@@ -60,10 +60,10 @@ login.php
 
 
 #
-#---------[ 5. FIND (line: 43) ]---------------------------------------------
+#---------[ 5. FIND ]---------------------------------------------
 #
 
-$username_sql = ($db_type == 'mysql' || $db_type == 'mysqli') ? 'username=\''.$db->escape($form_username).'\'' : 'LOWER(username)=LOWER(\''.$db->escape($form_username).'\')';
+$username_sql = ($db_type == 'mysql' || $db_type == 'mysqli' || $db_type == 'mysql_innodb' || $db_type == 'mysqli_innodb') ? 'username=\''.$db->escape($form_username).'\'' : 'LOWER(username)=LOWER(\''.$db->escape($form_username).'\')';
 
 
 #
@@ -81,10 +81,10 @@ register.php
 
 
 #
-#---------[ 8. FIND (line: 86) ]---------------------------------------------
+#---------[ 8. FIND ]---------------------------------------------
 #
 
-message('A new user was registered with the same IP address as you within the last hour. To prevent registration flooding, at least an hour has to pass between registrations from the same IP. Sorry for the inconvenience.');
+message($lang_register['Registration flood']);
 
 
 #
@@ -102,11 +102,11 @@ post.php
 
 
 #
-#---------[ 11. FIND (lines: 79-81) ]------------------------------------------
+#---------[ 11. FIND ]------------------------------------------
 #
 
 // Flood protection
-if (!$pun_user['is_guest'] && !isset($_POST['preview']) && $pun_user['last_post'] != '' && (time() - $pun_user['last_post']) < $pun_user['g_post_flood'])
+if (!isset($_POST['preview']) && $pun_user['last_post'] != '' && (time() - $pun_user['last_post']) < $pun_user['g_post_flood'])
 	$errors[] = $lang_post['Flood start'].' '.$pun_user['g_post_flood'].' '.$lang_post['flood end'];
 
 #

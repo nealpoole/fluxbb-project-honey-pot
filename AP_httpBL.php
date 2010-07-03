@@ -104,7 +104,7 @@ else	// If not, we show the "Show text" form
 
 		<h2 class="block2"><span>Basic Settings</span></h2>
 		<div class="box">
-			<form id="settings" method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
+			<form id="settings" method="post" action="<?php echo pun_htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
 				<p class="submittop"><input type="submit" name="update_settings" value="Save changes" /></p>
 				<div class="inform">
 					<fieldset>
